@@ -1,0 +1,78 @@
+# ---- Go build artifacts ----
+# Compiled binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binaries / output
+*.test
+*.out
+coverage.html
+coverage.txt
+profile.out
+cpu.prof
+mem.prof
+
+# Common build / output dirs
+bin/
+dist/
+build/
+
+# `go work` local overrides — usually NOT committed
+go.work
+go.work.sum
+
+# Vendor directory — uncomment if you don't commit vendored deps
+# vendor/
+
+# NOTE: go.mod and go.sum ARE committed — do NOT ignore them.
+
+# ---- Environment / secrets ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ---- Hot reload / dev tools ----
+# `air` reload tool
+tmp/
+.air.toml.local
+
+# `wgo` reload
+.wgo/
+
+# ---- IDE / editor ----
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.fleet/
+.zed/
+
+# ---- OS noise ----
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# ---- Logs ----
+*.log
+logs/
+
+# ---- Docker / local infra volumes ----
+# Common volume mount paths used in compose stacks
+.postgres-data/
+.redis-data/
+.minio-data/
+data/
+
+# ---- Misc ----
+node_modules/
+*.bak
+*.tmp
