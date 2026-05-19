@@ -1,0 +1,34 @@
+# Day 8 — local Postgres for SQL practice.
+#
+# Usage (from this folder):
+#
+#   docker compose up -d           # start in background
+#   docker compose ps              # is it healthy?
+#   docker compose logs -f         # follow logs (Ctrl+C to exit)
+#   docker compose exec postgres psql -U app -d appdb   # open a SQL shell
+#   docker compose down            # stop, keep data
+#   docker compose down -v         # stop AND wipe the volume (fresh start)
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: day08-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: appdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Files in /docker-entrypoint-initdb.d/ run once, on first startup of a fresh volume.
+      - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d appdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
