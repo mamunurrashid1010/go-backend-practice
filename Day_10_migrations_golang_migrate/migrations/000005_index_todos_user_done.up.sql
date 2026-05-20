@@ -1,0 +1,1 @@
+CREATE INDEX idx_todos_user_done ON todos(user_id, done);
