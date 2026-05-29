@@ -1,0 +1,27 @@
+# Day 14 — self-contained Postgres for the mini-project.
+#
+#   docker compose up -d
+#   docker compose down       # stop, keep data
+#   docker compose down -v    # wipe the volume too
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: day14-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: appdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d appdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
