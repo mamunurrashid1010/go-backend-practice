@@ -1,0 +1,18 @@
+version: "2"
+sql:
+  - engine: postgresql
+    queries: queries/
+    schema:
+      - migrations/000001_create_users.up.sql
+      - migrations/000003_create_notes.up.sql
+      - migrations/000004_index_notes_user_id_desc.up.sql
+    gen:
+      go:
+        package: db
+        out: internal/db
+        sql_package: database/sql
+        emit_json_tags: false
+        emit_prepared_queries: false
+        emit_interface: false
+        emit_exact_table_names: false
+        emit_empty_slices: true

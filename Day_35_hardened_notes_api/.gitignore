@@ -1,0 +1,23 @@
+# Local env — values, not the template
+.env
+
+# Build / test artefacts
+*.exe
+*.test
+*.out
+coverage.txt
+coverage.html
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# swag scratch output (we ship internal/openapi/openapi.yaml as the source of truth)
+docs/docs.go
+docs/swagger.json
+docs/swagger.yaml
